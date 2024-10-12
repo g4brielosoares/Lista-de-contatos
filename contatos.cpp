@@ -3,6 +3,12 @@
 #include <fstream>
 #include <sstream>
 
+#ifdef _WIN32
+    #define CLEAR "cls"
+#else
+    #define CLEAR CLEAR
+#endif
+
 using namespace std;
 
 typedef struct contato {
@@ -54,7 +60,7 @@ int novoContatoOrdenado(Contato **lista, string nome, string numTel, string emai
 void receberDados(Contato **lista) {
     ifstream entrada;
     string linha, nome, numTel, email, i;
-    entrada.open("data.txt");
+    entrada.open("../dados/dados.txt", ios::in);
 
     if (entrada.is_open()) {
         while (getline(entrada, linha)) {
@@ -77,7 +83,7 @@ void receberDados(Contato **lista) {
 void salvarDados(Contato **lista) {
     ofstream saida;
     Contato *aux = *lista;
-    saida.open("data.txt");
+    saida.open("../dados/dados.txt", ios::out);
 
     while (aux) {
         saida << aux->nome << ";" << aux->numTel << ";" << aux->email << endl;
@@ -156,7 +162,7 @@ void mostrarLista(Contato *lista) {
 int menuEditarInfo(Contato *aux) {
     int opc = 0;
 
-    system("clear");    
+    system(CLEAR);
     cout << "\n\t    FICHA  DE CONTATO\n\n";
     cout << "------------------------------------------" << endl;
     cout << "\n  Nome:" << endl;
@@ -215,7 +221,7 @@ void editarInfo(Contato *aux) {
 int menuAbrirContato(Contato *aux) {
     int opc = 0;
 
-    system("clear");    
+    system(CLEAR);    
     cout << "\n\t    FICHA  DE CONTATO\n\n";
     cout << "------------------------------------------" << endl;
     cout << "\n  Nome:" << endl;
@@ -261,7 +267,7 @@ void abrirContato(Contato **lista, string nome) {
 int menuPrincipal(Contato *lista) {
     int opc = 0;
 
-    system("clear");
+    system(CLEAR);
     mostrarLista(lista);
     cout << "  [1] - Adicionar contato." << endl;
     cout << "  [2] - Remover contato." << endl;
