@@ -6,7 +6,7 @@
 #ifdef _WIN32
     #define CLEAR "cls"
 #else
-    #define CLEAR CLEAR
+    #define CLEAR "clear"
 #endif
 
 using namespace std;
